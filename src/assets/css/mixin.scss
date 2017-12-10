@@ -1,0 +1,10 @@
+/*
+ * @Author: meng 
+ * @Date: 2017-12-05 20:26:30 
+ * 公共引入样式
+ */
+%ellipsis {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

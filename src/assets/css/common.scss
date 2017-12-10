@@ -1,0 +1,86 @@
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  padding: 0;
+}
+
+body {
+  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background: #f3f3f3;
+  font-size: 14px;
+}
+
+a {
+  text-decoration: none;
+  color: #f00;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: "";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+// 公共样式
+.c-text-left{
+  text-align: left !important;
+}
+.c-text-right{
+  text-align: right !important;
+}
+.c-text-center{
+  text-align: center !important;
+}
+.c-fr{
+  float: right;
+}
+.c-fl{
+  float: left;
+}
+
+#app{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+.c-title {
+  display: block;
+  font-size: 18px;
+  width: 200px;
+  line-height: 40px;
+  border-bottom: 3px solid #999;
+  margin: 0;
+  margin-bottom: 40px;
+}
+.view{
+  position: relative;
+}
+.cp-scroll-content{
+  position: relative;
+  padding: 60px 0;
+  width: 1000px;
+  margin: 0 auto;
+}
+.c-error{
+  margin: 5px 0;
+  color: red;
+  font-size: 12px;
+}

@@ -1,0 +1,14 @@
+// 弹窗样式重写
+.ivu-modal-wrap{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .ivu-modal{
+        top: -100px;
+    }
+}
+
+// 页码
+.ivu-page{
+    text-align: center;
+}
