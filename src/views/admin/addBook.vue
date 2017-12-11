@@ -14,6 +14,11 @@
                 <input type="text" v-validate="'required'" class="input-text" name="author" v-model="author" />
                 <span class="c-error" v-show="errors.has('author')">作者不能为空</span>
             </div>
+            <div class="label">
+                <span class="label-span">出版日期：</span>
+                <DatePicker type="date" format="yyyy-MM-dd" v-validate="'required'" name="publish" v-model="publish" placeholder="请选择" style="width: 200px"></DatePicker>
+                <span class="c-error" v-show="errors.has('publish')">出版日期不能为空</span>
+            </div>
             <div class="label"><span class="label-span">简介：</span>
                 <quill-editor v-model="content"
                       :options="editorOption" >
@@ -33,6 +38,7 @@ import { ImageImport } from 'js/ImageImport.js'
 import { ImageResize } from 'js/ImageResize.js'
 Quill.register('modules/imageImport', ImageImport)
 Quill.register('modules/imageResize', ImageResize)
+import {Modal,DatePicker} from 'iview'
 
 export default {
   data(){
@@ -41,6 +47,7 @@ export default {
           newsId:'',
           book_title:'',
           content:'',
+          publish:'',
           author:'',
           editorOption: {
             placeholder: "输入内容",
@@ -90,18 +97,21 @@ export default {
         if(!this.author){
             return this.$toast('作者不能为空！')
         }
+        if(!this.publish){
+            return this.$toast('出版日期不能为空！')
+        }
         if(!this.content){
             return this.$toast('简介不能为空！')
         }
         var params={
             author: this.author,
             title: this.book_title,
+            publish:this.publish,
             content: this.content
          }
         if(this.newsId) return this.updateBook(params);
         post_book(params).then((res)=>{
             let msg='增加成功！';
-            // if(this.newsId) msg='修改成功';
             this.$toast(msg);
             setTimeout(()=>{
                 this.$router.push({name: 'adminBook'});
@@ -142,16 +152,13 @@ export default {
            .label-span{
                display:inline-block;
                line-height: 24px;
-               vertical-align: top;
-                      
+               vertical-align: top;                     
+           }
+           input{
+               font-size: 14px;
            }
            .input-text{
-               display: inline-block;
-               height:24px;
-               line-height: 24px;
                width: 240px;
-               border-radius: 2px;
-               border: 1px solid #999;
            }
         }
         .submit{

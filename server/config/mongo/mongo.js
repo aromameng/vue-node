@@ -37,6 +37,7 @@ exports.Post = mongolass.model('Post', {
     author: { type: 'string' },
     title: { type: 'string' },
     content: { type: 'string' },
+    publish: { type: 'string' },
     pv: { type: 'number' }
 });
 exports.Post.index({ author: 1, _id: -1 }).exec();// 按创建时间降序查看用户的文章列表

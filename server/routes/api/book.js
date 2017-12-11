@@ -1,6 +1,7 @@
 var express = require('express');
 var router = express.Router();
 import PostModel from '../../models/posts'
+import {formatDate} from '../../public/js/helper'
 
 let responseData;
 router.use(function (req, res, next) {
@@ -31,11 +32,12 @@ router.get('/', function(req, res, next) {
 // POST /news 创建一篇文章
 router.post('/', function(req, res, next) {
     var author = req.body.author;
-    var title = req.body.title;
-    var content = req.body.content;
+    req.body.publish = formatDate(new Date(req.body.publish),'yyyy-MM-dd hh:mm:ss');
+    var {author,title,publish,content} = req.body;
     var post = {
         author: author,
         title: title,
+        publish:publish,
         content: content,
         pv: 0
     };
@@ -50,13 +52,13 @@ router.post('/', function(req, res, next) {
 
 /* POST /news/:id 修改某篇文章 */
 router.post('/:id', function(req, res, next) {
-    var id=req.params.id,
-        author = req.body.author,
-        title = req.body.title,
-        content = req.body.content;
+    var id=req.params.id;
+    req.body.publish = formatDate(new Date(req.body.publish),'yyyy-MM-dd hh:mm:ss');
+    var {author,title,publish,content} = req.body;
     var post = {
         author: author,
         title: title,
+        publish:publish,
         content: content,
         pv: 0
     };

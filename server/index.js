@@ -10,20 +10,13 @@ var bodyParser = require('body-parser');
 var config = require('./config/default');
 var http = require('http');
 
-
 var apiRouter = require('./routes/api/index');
 
-// console.log(apiRouter)
-
 var app = express();
-// var server = http.createServer(app);
-// server.listen(3000);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
-
-// console.log('cccc',config)
 
 // session 中间件
 app.use(session({
@@ -67,7 +60,5 @@ app.use(function(err, req, res, next) {
 
 // 设置为全局数据库连接句柄
 // global.query = query;
-
-
 
 module.exports = app;

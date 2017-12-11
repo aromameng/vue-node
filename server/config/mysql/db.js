@@ -6,7 +6,7 @@ const pool = mysql.createPool({
 	host: 'localhost',
 	user: 'root',
 	password: '123456',
-	database: 'qq'
+	database: 'evue'
 })
 
 export default (sql, values) => {
