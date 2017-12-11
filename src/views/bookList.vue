@@ -48,7 +48,6 @@ export default {
         rows:this.rows
       }
       get_booklist(params).then((res)=>{
-        // console.log(res)
         this.lists=res.data.result;
         // 截取字数
         this.lists.map((item)=>{

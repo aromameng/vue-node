@@ -7,37 +7,17 @@ import {
 const API_BOOK = '/api/book';
 const API_USER = '/api/user'
 
-import {isObject,isString,isNumber} from 'js/helper'
-
-function parse(path,params){
-  if (path.charAt(path.length - 1) === '/') path = path.substr(0, path.length - 1)
-  if (isString(params)) return path + '/' + params
-  if (isNumber(params)) return path + '/' + params
-  if (isObject(params)) {
-    if (/:[a-zA-Z]+/.test(path)) {
-      for (var key in params) {
-        path = path.replace(new RegExp(':' + key, 'g'), params[key])
-      }
-    } else {
-      var search = '?'
-      if (path.indexOf('?') > -1) {
-        search = '&'
-      }
-      var counter = 0
-      for (var key in params) {
-        if (counter) search += '&'
-        search += key + '=' + params[key]
-        counter++
-      }
-      return path + search
-    }
-  }
-  return path
-}
+import {isObject,isString,isNumber,parse} from 'js/helper'
 
 // 获取图书列表
 export const get_booklist = (data) => {
   const url = parse(API_BOOK,data);
+  return request_get(url)
+}
+
+// 获取最新发版的图书列表
+export const get_newbooklist = (data) => {
+  const url = `${API_BOOK}/new10`
   return request_get(url)
 }
 

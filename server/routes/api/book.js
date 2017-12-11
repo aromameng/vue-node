@@ -12,7 +12,7 @@ router.use(function (req, res, next) {
     next()
 })
 
-// GET /news 获取文章列表
+// GET /book 获取图书列表
 router.get('/', function(req, res, next) {
     let page= Number(req.query.page),
         rows =Number(req.query.rows);
@@ -29,9 +29,20 @@ router.get('/', function(req, res, next) {
     }).catch(next);
 });
 
-// POST /news 创建一篇文章
+// GET /book 获取最新发版的10条图书列表
+router.get('/new10', function(req, res, next) {
+    PostModel.getPosts(1,10).then((request)=>{
+        PostModel.getPostCount().then((total)=>{
+            responseData.data={
+                result:request
+            };
+            res.json(responseData); 
+        })            
+    }).catch(next);
+});
+
+// POST /book 创建图书
 router.post('/', function(req, res, next) {
-    var author = req.body.author;
     req.body.publish = formatDate(new Date(req.body.publish),'yyyy-MM-dd hh:mm:ss');
     var {author,title,publish,content} = req.body;
     var post = {
@@ -50,7 +61,7 @@ router.post('/', function(req, res, next) {
     .catch(next);
 });
 
-/* POST /news/:id 修改某篇文章 */
+/* POST /book/:id 修改图书 */
 router.post('/:id', function(req, res, next) {
     var id=req.params.id;
     req.body.publish = formatDate(new Date(req.body.publish),'yyyy-MM-dd hh:mm:ss');
@@ -67,9 +78,7 @@ router.post('/:id', function(req, res, next) {
     }).catch(next);
 });
 
-
-
-/* GET /news/:id 获取某篇文章 */
+/* GET /book/:id 获取某篇文章 */
 router.get('/:id', function(req, res, next) {
     var id=req.params.id;
     PostModel.getPostById(id).then(function(request){
@@ -78,10 +87,9 @@ router.get('/:id', function(req, res, next) {
     }).catch(next);
 });
 
-// GET /news/remove/:postId 删除一篇文章
+// GET /book/remove/:postId 删除一篇文章
 router.get('/remove/:id', function(req, res, next) {
     var id = req.params.id;
-
     PostModel.delPostById(id)
       .then(function () {
         res.json(responseData);     

@@ -26,3 +26,4 @@ export const formatDate=function(date,fmt){
 
     return fmt;
 }
+

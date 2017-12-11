@@ -80,7 +80,7 @@ export default {
     },
     sureDel(){
       del_book(this.currId).then((res)=>{
-        console.log(res)       
+        // console.log(res)       
         this.getList();
         this.$toast('删除成功！');
       }).catch((err)=>{

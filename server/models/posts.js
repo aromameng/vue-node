@@ -18,21 +18,27 @@ Post.plugin('contentToHtml', {
 });
 
 module.exports = {
-    // 按创建时间降序获取所有用户文章或者某个特定用户的所有文章
-    getPosts(page=1,rows=10,author=0) {
-        var query = {};
-        if (author) {
-          query.author = author;
-        }
+    // 按创建时间降序获取所有用户文章
+    getPosts(page=1,rows=10) {
         return Post
-        .find(query)
+        .find()
         .limit(rows)
         .skip((page-1)*rows)
-        .populate({ path: 'author', model: 'User' })
         .sort({ _id: -1 })
         .addCreatedAt()
         .contentToHtml()
         .exec();
+    },
+    // 按出版时间降序获取所有文章
+    getPostsPublish(page=1,rows=10){
+      return Post
+      .find()
+      .limit(rows)
+      .skip((page-1)*rows)
+      .sort({ publish: -1 })
+      .addCreatedAt()
+      .contentToHtml()
+      .exec();
     },
     // 获取总文章数
     getPostCount(){
@@ -42,7 +48,6 @@ module.exports = {
     getPostById(postId) {
         return Post
         .findOne({ _id: postId })
-        .populate({ path: 'author', model: 'User' })
         .addCreatedAt()
         .contentToHtml()
         .exec();

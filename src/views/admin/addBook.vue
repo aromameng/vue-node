@@ -13,7 +13,7 @@
                 <span class="label-span">作者：</span>
                 <input type="text" v-validate="'required'" class="input-text" name="author" v-model="author" />
                 <span class="c-error" v-show="errors.has('author')">作者不能为空</span>
-            </div>
+            </div> 
             <div class="label">
                 <span class="label-span">出版日期：</span>
                 <DatePicker type="date" format="yyyy-MM-dd" v-validate="'required'" name="publish" v-model="publish" placeholder="请选择" style="width: 200px"></DatePicker>
@@ -135,6 +135,7 @@ export default {
               this.book_title = res.data.title;
               this.author = res.data.author;
               this.content = res.data.content;
+              this.publish = res.data.publish.slice(0,10);
           },(err)=>{
               console.log(err)
           })
