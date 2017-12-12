@@ -1,7 +1,8 @@
 import {
   request_get,
   request_post,
-  request_put
+  request_put,
+  request_upload
 } from '@/assets/js/request'
 
 const API_BOOK = '/api/book';
@@ -74,4 +75,10 @@ export const get_comment = (id) => {
 export const post_comment = (bookId,authorId,data)=>{
   const url = parse(`${API_COMMENT}/add/${bookId}/${authorId}`,data) 
   return request_post(url,data)
+}
+
+// 图片提交
+export const uploadimg = (data)=>{
+  const url = `${API_USER}/uploadimg`
+  return request_upload(url,data)
 }

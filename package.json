@@ -19,6 +19,7 @@
     "debug": "^3.1.0",
     "express-session": "^1.15.6",
     "fastclick": "^1.0.6",
+    "formidable": "^1.1.1",
     "iview": "^2.7.4",
     "jade": "^1.11.0",
     "jsonp": "^0.2.1",

@@ -52,3 +52,20 @@ export function request_delete(url) {
 			return Promise.reject(res.data.msg)
 		})
 }
+
+
+/**
+ * [request_upload 封装upload请求]
+ * @param  {[string]} url  [请求地址]
+ * @return {[object]}      [promise]
+ */
+export function request_upload(url,data) {
+	let config = {
+		headers:{'Content-Type':'application/x-www-form-urlencoded'}
+	}
+	return axios.post(url,data,config)
+		.then((res) => {
+			if(!res.data.code) return Promise.resolve(res.data);
+			return Promise.reject(res.data.msg)
+		})
+}

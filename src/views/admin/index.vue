@@ -4,7 +4,9 @@
     <div class="cp-scroll-content">
         <div class="main-con" v-if="isLogin">
           <h4 class="c-title">个人中心</h4>
-          <p>欢迎您！{{userInfo && userInfo.name}}</p>
+          <p>欢迎您！</p>
+          <br/>
+          <img :src="userInfo && userInfo.avatar" class="avatar" /><span class="name">{{userInfo && userInfo.name}}</span>
           <router-link  class="back" to="/">返回首页</router-link>
         </div>
        
@@ -49,6 +51,15 @@ export default {
         font-size: 16px;
         margin-top: 10px;
         display: block;
+      }
+      .avatar{
+        width: 60px;
+        height: 60px;
+        display: inline-block;
+      }
+      .name{
+         display: inline-block;
+         padding-left: 10px;
       }
   }
 </style>

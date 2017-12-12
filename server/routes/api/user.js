@@ -4,6 +4,11 @@ import UserModel from '../../models/user'
 import { userInfo } from 'os';
 var sha1 = require('sha1');
 
+var formidable = require('formidable'),
+    http = require('http'),
+    fs = require('fs'),
+    util = require('util');
+
 let responseData;
 router.use(function (req, res, next) {
     responseData = {
@@ -18,6 +23,7 @@ router.post('/register', function(req, res, next) {
     const user={
         name:req.body.name,
         password: sha1(req.body.password),
+        avatar:req.body.avatar,
         isAdmin:false
     }
     UserModel.getUserByName(user.name).then((userInfo)=>{
@@ -63,6 +69,21 @@ router.post('/loginout', function(req, res, next) {
     req.session.user=null;
     responseData.data=null;
     res.json(responseData);
+});
+
+// POST 头像上传
+router.post('/uploadimg', function(req, res, next) {
+    var form = new formidable.IncomingForm();
+    form.encoding = 'utf-8';
+    form.uploadDir = "./server/public/images";
+    form.maxFieldsSize = 2 * 1024 * 1024;
+
+    form.parse(req, function(err,fields,files){
+        let file = files.file;
+        fs.rename(file.path , form.uploadDir + '/' + file.name);
+        responseData.data= 'http://localhost:8080/images/' + file.name;
+        res.json(responseData);
+    });
 });
 
 module.exports = router;
