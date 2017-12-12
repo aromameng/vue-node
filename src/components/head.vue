@@ -11,7 +11,7 @@
               <router-link to="/login" class="link">登录</router-link>
           </div>
           <div class="user-info" v-if="isLogin">
-              <span>欢迎您！{{userInfo && userInfo.name}}</span>
+              <span>{{userInfo && userInfo.name}}</span>
               <router-link to="/admin" class="person">个人中心</router-link>
               <span class="btn" @click="loginout">退出登录</span>
           </div>

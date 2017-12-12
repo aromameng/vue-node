@@ -1,9 +1,9 @@
 <template>
   <div class="cp-head">
       <div class="head-inner">
-          <router-link  to="/"><img src="../assets/img/pic.jpg" class="logo" /></router-link>
+          <router-link to="/"><img src="../assets/img/pic.jpg" class="logo" /></router-link>
           <ul class="menu">
-              <li :class="{'active':curMenu('addBook','adminBook')}">
+              <li v-if="userInfo.isAdmin" :class="{'active':curMenu('addBook','adminBook')}">
                   <a class="menu-item" href="javascript:;">图书管理</a>
                   <div class="box">
                       <router-link :class="{'active':curMenu('adminNews')}" to="/admin/book" class="link">图书列表</router-link>
@@ -21,7 +21,7 @@
               <router-link to="/admin" class="person">个人中心</router-link>
               <span class="btn" @click="loginout">退出登录</span>
           </div>
-      </div>
+      </div>    
   </div>
 </template>
 

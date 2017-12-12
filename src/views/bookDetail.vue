@@ -8,23 +8,17 @@
       <p class="time">出版日期：{{bookInfo.publish | dateFormat}}</p>
       <p>内容简介：</p>
       <div class="content" v-html="bookInfo.content"></div>
-      <p>评论：</p>
+      <p class="s-title">评论：</p>
       <ul class="comment-list">
-        <li>
-          <div class="info">辅导辅导方法发</div>
+        <li v-for="(item,index) in commentList" :key="index">
+          <div class="info">{{item.content}}</div>
           <div class="bottom">
-            <span>作者：方法</span>
-            <span class="c-fr">2017-02-24</span>
-          </div>
-        </li>
-        <li>
-          <div class="info">辅导辅导方法发</div>
-          <div class="bottom">
-            <span>作者：方法</span>
-            <span class="c-fr">2017-02-24</span>
+            <span>作者：{{item.author.name}}</span>
+            <span class="c-fr">{{item.created_at | dateFormat}}</span>
           </div>
         </li>
       </ul>
+      <p class="s-title">添加评论：</p>      
       <div class="add-comment" v-if="isLogin">
         <textarea class="con" v-model="comment" rows="5"></textarea>
         <button @click="submit" class="submit">提交</button>
@@ -38,8 +32,9 @@
 
 <script>
 
-import {get_bookDetail} from 'api/index'
+import {get_bookDetail,post_comment,get_comment} from 'api/index'
 import {mapGetters} from 'vuex'
+
 
 export default {
   data(){
@@ -55,7 +50,8 @@ export default {
   },
   created(){
   	this.bookId=this.$route.params.id;
-  	this.getDetail();
+    this.getDetail();
+    this.getComment();
   },
   methods:{
     getDetail(){
@@ -65,8 +61,30 @@ export default {
           console.log(err)
         })
     },
+    getComment(){
+       get_comment(this.bookId).then((res)=>{
+          this.commentList=res.data.result;
+        }).catch((err)=>{
+          console.log(err)
+        })
+    },
     submit(){
-
+        if(!this.comment.trim()){
+          return this.$Message.error('评论内容不能为空');
+        }
+        post_comment(this.bookId,this.userInfo._id,{content:this.comment}).then((res)=>{
+           this.commentList.push({
+             author:{
+               _id:this.userInfo._id,
+               name:this.userInfo.name
+             },
+             content:this.comment,
+             created_at:res.data.created_at
+           })
+           this.comment='';
+        }).catch((err)=>{
+          console.log(err)
+        })
     }
   }
 }
@@ -82,13 +100,25 @@ export default {
       padding: 5px 0;
       text-align: left;
       text-indent: 2em;
+      margin-bottom: 20px;
     }
     .title{
       font-size: 16px;
     }
+    .s-title{
+      line-height: 30px;
+      font-size: 16px;
+      border-left: 3px solid #2d8cf0;
+      padding-left: 5px;
+      margin-bottom: 10px;
+    }
     .comment-list{
-      .info{
-        text-indent: 2em;
+      &>li{
+        padding: 5px 0;
+        border-bottom: 1px solid #ccc;
+        &:last-child{
+          border-bottom: none;
+        }
       }
       .bottom{
         color: #999;

@@ -17,7 +17,8 @@ router.use(function (req, res, next) {
 router.post('/register', function(req, res, next) {
     const user={
         name:req.body.name,
-        password: sha1(req.body.password)
+        password: sha1(req.body.password),
+        isAdmin:false
     }
     UserModel.getUserByName(user.name).then((userInfo)=>{
         if(userInfo){

@@ -2,7 +2,8 @@ var express = require('express');
 var apiRouter = express.Router();
 
 var book =require('./book'),
-    user = require('./user');
+    user = require('./user'),
+    comment = require('./comment');
 
 apiRouter.get('*',function(req, res, next) {
     var allowOrigin=["http://localhost:8080/","http://127.0.0.1:8080/"];
@@ -30,6 +31,7 @@ apiRouter.get('*',function(req, res, next) {
 apiRouter
     .use('/book',book)
     .use('/user',user)
+    .use('/comment',comment)
 
 //错误处理
 apiRouter.use(function(err, req, res, next) {

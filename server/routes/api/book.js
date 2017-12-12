@@ -16,10 +16,10 @@ router.use(function (req, res, next) {
 router.get('/', function(req, res, next) {
     let page= Number(req.query.page),
         rows =Number(req.query.rows);
-    PostModel.getPosts(page,rows).then((request)=>{
+    PostModel.getPosts(page,rows).then((result)=>{
         PostModel.getPostCount().then((total)=>{
             responseData.data={
-                result:request,
+                result:result,
                 total:total,
                 page:page,
                 rows:rows
@@ -31,10 +31,10 @@ router.get('/', function(req, res, next) {
 
 // GET /book 获取最新发版的10条图书列表
 router.get('/new10', function(req, res, next) {
-    PostModel.getPosts(1,10).then((request)=>{
+    PostModel.getPosts(1,10).then((result)=>{
         PostModel.getPostCount().then((total)=>{
             responseData.data={
-                result:request
+                result:result
             };
             res.json(responseData); 
         })            
@@ -96,6 +96,7 @@ router.get('/remove/:id', function(req, res, next) {
       })
       .catch(next);
   });
+
 
 
 module.exports = router;

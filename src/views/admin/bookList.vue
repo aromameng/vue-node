@@ -1,7 +1,7 @@
 <template>
   <div class="news-view">
     <admin-head></admin-head>
-    <div class="cp-scroll-content">
+    <div class="cp-scroll-content" v-if="userInfo.isAdmin">
       <h4 class="c-title">图书列表</h4>
       <ul class="news-list">
         <li class="list-head">
@@ -27,12 +27,16 @@
         @on-ok="sureDel">
         <p>确定要删除吗?</p>
     </Modal>
+    <div class="cp-no-authority" v-if="!userInfo.isAdmin">
+        <span>你无权限访问该页面</span>
+    </div>
   </div>
 </template>
 
 <script>
 import {get_booklist,del_book} from 'api/index'
 import {Modal,Page} from 'iview'
+import {mapGetters} from 'vuex'
 
 export default {
   data(){
@@ -44,6 +48,9 @@ export default {
           rows:10,
           totalNum:0
       }
+  },
+  computed: {
+      ...mapGetters(['userInfo'])
   },
   created(){
     

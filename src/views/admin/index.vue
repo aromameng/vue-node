@@ -7,9 +7,10 @@
           <p>欢迎您！{{userInfo && userInfo.name}}</p>
           <router-link  class="back" to="/">返回首页</router-link>
         </div>
-        <div class="no-authority" v-if="!isLogin">
-            <span>你无权限访问该页面，请</span><router-link to="/login">登录</router-link>
-        </div>
+       
+    </div>
+    <div class="cp-no-authority" v-if="!isLogin">
+        <span>你无权限访问该页面，请</span><router-link to="/login">登录</router-link>
     </div>
   </div>
 </template>

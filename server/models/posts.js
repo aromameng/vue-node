@@ -60,7 +60,7 @@ module.exports = {
     create(post) {
       return Post.create(post).exec();
     },
-    // 通过用户 id 和文章 id 删除一篇文章
+    // 通过用户 id 和图书 id 删除一篇文章
     delPostById(postId) {
       return Post.remove({_id: postId }).exec()
     }

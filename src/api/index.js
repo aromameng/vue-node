@@ -6,8 +6,27 @@ import {
 
 const API_BOOK = '/api/book';
 const API_USER = '/api/user'
+const API_COMMENT = '/api/comment'
 
 import {isObject,isString,isNumber,parse} from 'js/helper'
+
+// 注册
+export const user_reg = (data) =>{
+  const url = `${API_USER}/register`
+  return request_post(url,data)
+}
+
+// 登录
+export const user_login = (data) =>{
+  const url = `${API_USER}/login`
+  return request_post(url,data)
+}
+
+// 退出登录
+export const user_loginout = (data) =>{
+  const url = `${API_USER}/loginout`
+  return request_post(url,data)
+}
 
 // 获取图书列表
 export const get_booklist = (data) => {
@@ -45,20 +64,14 @@ export const del_book = (id) =>{
   return request_get(url)
 }
 
-// 注册
-export const user_reg = (data) =>{
-  const url = `${API_USER}/register`
-  return request_post(url,data)
+// 获取图书评论
+export const get_comment = (id) => {
+  const url = `${API_COMMENT}/${id}`
+  return request_get(url)
 }
 
-// 登录
-export const user_login = (data) =>{
-  const url = `${API_USER}/login`
-  return request_post(url,data)
-}
-
-// 退出登录
-export const user_loginout = (data) =>{
-  const url = `${API_USER}/loginout`
+// 提交评论
+export const post_comment = (bookId,authorId,data)=>{
+  const url = parse(`${API_COMMENT}/add/${bookId}/${authorId}`,data) 
   return request_post(url,data)
 }

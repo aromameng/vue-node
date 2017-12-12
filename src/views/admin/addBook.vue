@@ -1,7 +1,7 @@
 <template>
   <div class="addnews-view">
     <admin-head></admin-head>
-    <div class="cp-scroll-content">
+    <div class="cp-scroll-content" v-if="userInfo.isAdmin">
         <h4 class="c-title">{{title}}</h4>
         <div class="form">
             <div class="label">
@@ -26,7 +26,10 @@
             </div>
 
             <div class="label"><button class="submit" @click="submit()">提交</button></div>
-        </div>
+        </div>       
+    </div>
+    <div class="cp-no-authority" v-if="!userInfo.isAdmin">
+        <span>你无权限访问该页面</span>
     </div>
   </div>
 </template>
@@ -39,6 +42,7 @@ import { ImageResize } from 'js/ImageResize.js'
 Quill.register('modules/imageImport', ImageImport)
 Quill.register('modules/imageResize', ImageResize)
 import {Modal,DatePicker} from 'iview'
+import {mapGetters} from 'vuex'
 
 export default {
   data(){
@@ -74,7 +78,8 @@ export default {
   computed: {
       editor() {
         return this.$refs.myTextEditor.quill
-      }
+      },
+      ...mapGetters(['userInfo'])
   },
   created(){
     this.newsId=this.$route.query.id;
@@ -91,16 +96,16 @@ export default {
   },
   methods:{
       submit(){        
-        if( !this.book_title){
+        if( !this.book_title.trim()){
             return this.$toast('书名不能为空！')
         }
-        if(!this.author){
+        if(!this.author.trim()){
             return this.$toast('作者不能为空！')
         }
-        if(!this.publish){
+        if(!this.publish.trim()){
             return this.$toast('出版日期不能为空！')
         }
-        if(!this.content){
+        if(!this.content.trim()){
             return this.$toast('简介不能为空！')
         }
         var params={
