@@ -2,9 +2,11 @@ var Comment = require('../config/mongo/mongo').Comment;
 
 module.exports = {
     // 获取评论
-    getComment(postId){
+    getComment(postId,page=1,rows=10){
         return Comment
         .find({postId:postId})
+        .limit(rows)
+        .skip((page-1)*rows)
         .populate({ path: 'author',select:{password:0} , model: 'User' })
         .sort({ _id: -1 })
         .addCreatedAt()

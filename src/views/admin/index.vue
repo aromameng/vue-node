@@ -6,7 +6,7 @@
           <h4 class="c-title">个人中心</h4>
           <p>欢迎您！</p>
           <br/>
-          <img :src="userInfo && userInfo.avatar" class="avatar" /><span class="name">{{userInfo && userInfo.name}}</span>
+          <img :src="userInfo && userInfo.avatar || defaultImg" class="avatar" /><span class="name">{{userInfo && userInfo.name}}</span>
           <router-link  class="back" to="/">返回首页</router-link>
         </div>
        
@@ -23,7 +23,7 @@ import {mapGetters} from 'vuex'
 export default {
   data(){
       return{
-          
+          defaultImg: require("../../assets/img/default.jpg")
       }
   },
   computed: {
