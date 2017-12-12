@@ -16,11 +16,11 @@
             <span>{{item.author.name}}</span>
           </div>
           <div class="info">{{item.content}}</div>
-          <div class="bottom">
-            
+          <div class="bottom">         
             <span>{{item.created_at | dateFormat}}</span>
           </div>
         </li>
+        <li class="cp-nodata" v-if="!commentList.length">暂无评论</li>
       </ul>
       <p class="s-title">添加评论：</p>      
       <div class="add-comment" v-if="isLogin">

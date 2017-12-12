@@ -102,7 +102,7 @@ export default {
         if(!this.author.trim()){
             return this.$toast('作者不能为空！')
         }
-        if(!this.publish.trim()){
+        if(!this.publish){
             return this.$toast('出版日期不能为空！')
         }
         if(!this.content.trim()){
