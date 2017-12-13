@@ -18,4 +18,9 @@ module.exports = {
         .create(comment)
         .exec()
     },
+    // 获取评论总数
+    getCount(bookId){
+        return Comment
+        .count({postId:bookId}).exec();
+    }
 }

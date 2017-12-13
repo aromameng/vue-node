@@ -22,6 +22,7 @@
 <script>
 import {mapGetters} from 'vuex'
 import {user_login} from 'api/index'
+import sha1 from 'sha1'
 
 export default {
   data(){
@@ -50,7 +51,7 @@ export default {
           }
           const user={
               name:this.user,
-              password:this.password
+              password:sha1(this.password)
           }
           user_login(user).then((res)=>{
                 this.$toast('登录成功！');

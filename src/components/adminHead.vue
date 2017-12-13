@@ -8,8 +8,10 @@
                   <div class="box">
                       <router-link :class="{'active':curMenu('adminNews')}" to="/admin/book" class="link">图书列表</router-link>
                       <router-link :class="{'active':curMenu('addNews')}" to="/admin/addBook" class="link">添加图书</router-link>
-                  </div>
-                  
+                  </div>                
+              </li>
+              <li v-if="userInfo.isAdmin" >
+                  <router-link :class="{'active':curMenu('adminUser')}" to="/admin/user" class="link menu-item">用户列表</router-link>
               </li>
           </ul>
           <div class="user-info"  v-if="!isLogin">
@@ -112,7 +114,7 @@ export default {
                     // min-width:60px;
                     height: 100%;
                     color: #8590a6;
-                    &:hover{
+                    &:hover,&.active{
                         color: #175199;
                     }
                 }

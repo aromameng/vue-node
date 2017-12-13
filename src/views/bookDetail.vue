@@ -11,9 +11,9 @@
       <p class="s-title">评论：</p>
       <ul class="comment-list">
         <li v-for="(item,index) in commentList" :key="index">
-          <div class="top">
-            <img class="pic" :src="item.author.avatar || defaultImg" />
-            <span>{{item.author.name}}</span>
+          <div class="user-info" @click="goUserCenter(item)">
+              <img class="pic" :src="item.author.avatar || defaultImg" />
+              <span>{{item.author.name || '注销'}}</span>
           </div>
           <div class="info">{{item.content}}</div>
           <div class="bottom">         
@@ -22,6 +22,7 @@
         </li>
         <li class="cp-nodata" v-if="!commentList.length">暂无评论</li>
       </ul>
+      <Page v-if="commentLen" :total="commentLen" size="small" @on-change="changePage"></Page>
       <p class="s-title">添加评论：</p>      
       <div class="add-comment" v-if="isLogin">
         <textarea class="con" v-model="comment" rows="5"></textarea>
@@ -38,6 +39,7 @@
 
 import {get_bookDetail,post_comment,get_comment} from 'api/index'
 import {mapGetters} from 'vuex'
+import {Page} from 'iview'
 
 
 export default {
@@ -47,7 +49,10 @@ export default {
           bookInfo:'',
           comment:'',
           commentList:[],
-          defaultImg: require("../assets/img/default.jpg")
+          defaultImg: require("../assets/img/default.jpg"),
+          commentLen:0,
+          page:1,
+          rows:10
       }
   },
   computed: {
@@ -70,8 +75,14 @@ export default {
         })
     },
     getComment(){
-       get_comment(this.bookId).then((res)=>{
+       var params={
+          page:this.page,
+          rows:this.rows,
+          bookId:this.bookId
+       }
+       get_comment(params).then((res)=>{
           this.commentList=res.data.result;
+          this.commentLen = res.data.total;
         }).catch((err)=>{
           console.log(err)
         })
@@ -94,6 +105,14 @@ export default {
         }).catch((err)=>{
           console.log(err)
         })
+    },
+    changePage(page){
+       this.page=page;
+       this.getComment();
+    },
+    goUserCenter(item){
+      if(!item.author._id) return
+      this.$router.push({name:'userCenter',query:{name:item.author.name}});
     }
   }
 }
@@ -127,6 +146,9 @@ export default {
         border-bottom: 1px solid #ccc;
         &:last-child{
           border-bottom: none;
+        }
+        .user-info{
+          cursor: pointer;
         }
         .info{
           padding: 10px 0;

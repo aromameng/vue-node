@@ -9,11 +9,13 @@ import login from 'views/login'
 import register from 'views/register'
 import test from 'views/test'
 import notFound from 'views/404'
+import userCenter from 'views/userCenter'
 
 // 后台
 import addBook from 'views/admin/addBook'
 import admin from 'views/admin/index'
 import adminBook from 'views/admin/bookList'
+import adminUser from 'views/admin/userList'
 Vue.use(Router)
 
 export default new Router({
@@ -60,6 +62,14 @@ export default new Router({
       }
     },
     {
+      path: '/userCenter',
+      name: 'userCenter',
+      component: userCenter,
+      meta:{
+        title:'个人主页'
+      }
+    },
+    {
       path: '/test',
       name: 'test',
       component: test
@@ -79,5 +89,10 @@ export default new Router({
       name: 'adminBook',
       component: adminBook
      },
+     {
+       path: '/admin/user',
+       name: 'adminUser',
+       component: adminUser
+      },
   ]
 })

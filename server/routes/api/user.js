@@ -49,7 +49,7 @@ router.post('/login', function(req, res, next) {
     let name=req.body.name,
           password=req.body.password;
     UserModel.getUserByName(name).then((result)=>{
-        if(!result || sha1(password) !== result.password){
+        if(!result || password !== result.password){
            responseData.code=1;
            responseData.msg="用户名或密码错误";
            res.json(responseData);
@@ -85,5 +85,42 @@ router.post('/uploadimg', function(req, res, next) {
         res.json(responseData);
     });
 });
+
+// GET 获取用户列表
+router.get('/', function(req, res, next) {
+    let page= Number(req.query.page),
+        rows =Number(req.query.rows);
+    UserModel.getUserList(page,rows).then((result)=>{
+        UserModel.getUserCount().then((total)=>{
+            responseData.data={
+                result:result,
+                total:total,
+                page:page,
+                rows:rows
+            };
+            res.json(responseData); 
+        })            
+    }).catch(next);
+});
+
+// GET /user/:name 获取用户信息
+router.get('/:name', function(req, res, next) {
+    let name = req.params.name;
+    UserModel.getUserByName(name).then((result)=>{
+        delete result.password;
+        responseData.data=result;
+        res.json(responseData);           
+    }).catch(next);
+});
+
+// DELETE /user/remove/:id 删除用户
+router.delete('/remove/:id', function(req, res, next) {
+    var id = req.params.id;
+    UserModel.delUserById(id)
+      .then(function () {
+        res.json(responseData);     
+      })
+      .catch(next);
+  });
 
 module.exports = router;

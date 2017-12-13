@@ -140,7 +140,7 @@ export default {
               this.book_title = res.data.title;
               this.author = res.data.author;
               this.content = res.data.content;
-              this.publish = res.data.publish.slice(0,10);
+              this.publish = res.data.publish && res.data.publish.slice(0,10);
           },(err)=>{
               console.log(err)
           })

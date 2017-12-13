@@ -87,8 +87,8 @@ router.get('/:id', function(req, res, next) {
     }).catch(next);
 });
 
-// GET /book/remove/:postId 删除一篇文章
-router.get('/remove/:id', function(req, res, next) {
+// DELETE /book/remove/:postId 删除一篇文章
+router.delete('/remove/:id', function(req, res, next) {
     var id = req.params.id;
     PostModel.delPostById(id)
       .then(function () {

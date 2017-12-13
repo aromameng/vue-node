@@ -14,17 +14,22 @@ router.use(function (req, res, next) {
     next()
 })
 
-// GET /comment/:bookId 获取图书的评论
-router.get('/:bookId',function(req, res, next){
+// GET /comment 获取图书的评论
+router.get('/',function(req, res, next){
     let page= Number(req.query.page),
     rows =Number(req.query.rows);
-    var bookId = req.params.bookId;
-    CommentModel.getComment(bookId)
+    var bookId = req.query.bookId;
+    CommentModel.getComment(bookId,page,rows)
     .then(function(result){
-        responseData.data={
-            result:result
-        };
-        res.json(responseData); 
+        CommentModel.getCount(bookId).then((total)=>{
+            responseData.data={
+                result:result,
+                total:total,
+                page:page,
+                rows:rows
+            };
+            res.json(responseData); 
+        })     
     }).catch(next);
 })
 

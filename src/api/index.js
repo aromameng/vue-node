@@ -2,6 +2,7 @@ import {
   request_get,
   request_post,
   request_put,
+  request_delete,
   request_upload
 } from '@/assets/js/request'
 
@@ -62,12 +63,12 @@ export const update_book = (id,data)=>{
 // 删除图书
 export const del_book = (id) =>{
   const url = `${API_BOOK}/remove/${id}`
-  return request_get(url)
+  return request_delete(url)
 }
 
 // 获取图书评论
-export const get_comment = (id) => {
-  const url = `${API_COMMENT}/${id}`
+export const get_comment = (data) => {
+  const url = parse(`${API_COMMENT}`,data)
   return request_get(url)
 }
 
@@ -81,4 +82,22 @@ export const post_comment = (bookId,authorId,data)=>{
 export const uploadimg = (data)=>{
   const url = `${API_USER}/uploadimg`
   return request_upload(url,data)
+}
+
+// 获取用户列表
+export const get_user = (data) =>{
+  const url = parse(`${API_USER}`,data)
+  return request_get(url)
+}
+
+// 根据用户名获取用户信息
+export const get_user_info = (name) =>{
+  const url = `${API_USER}/${name}`
+  return request_get(url)
+}
+
+// 删除用户
+export const del_user = (id) =>{
+  const url = `${API_USER}/remove/${id}`
+  return request_delete(url)
 }
