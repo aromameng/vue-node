@@ -35,7 +35,7 @@ apiRouter
 
 //错误处理
 apiRouter.use(function(err, req, res, next) {
-    console.error(err.stack);
+    console.error(11111111111);
     console.log('err',err)
     res.status(500).send(err);
 });

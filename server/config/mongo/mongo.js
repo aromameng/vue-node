@@ -28,7 +28,7 @@ mongolass.plugin('addCreatedAt', {
     },
     afterFindOne: function (result) {
         if (result) {
-        result.created_at = moment(objectIdToTimestamp(result._id)).format('YYYY-MM-DD HH:mm');
+            result.created_at = moment(objectIdToTimestamp(result._id)).format('YYYY-MM-DD HH:mm');
         }
         return result;
     }

@@ -107,7 +107,7 @@ router.get('/', function(req, res, next) {
 router.get('/:name', async(req, res, next) => {
     const name = req.params.name;
     const result = await UserModel.getUserByName(name);
-    delete result.password;
+    if(result) delete result.password;
     responseData.data=result;
     res.json(responseData);
 });
