@@ -79,24 +79,18 @@ router.post('/:id', function(req, res, next) {
 });
 
 /* GET /book/:id 获取某篇文章 */
-router.get('/:id', function(req, res, next) {
+router.get('/:id', async(req, res, next) => {
     var id=req.params.id;
-    PostModel.getPostById(id).then(function(request){
-        responseData.data=request;
-        res.json(responseData);     
-    }).catch(next);
+    const result = await PostModel.getPostById(id);
+    responseData.data=result;
+    res.json(responseData);
 });
 
 // DELETE /book/remove/:postId 删除一篇文章
-router.delete('/remove/:id', function(req, res, next) {
-    var id = req.params.id;
-    PostModel.delPostById(id)
-      .then(function () {
-        res.json(responseData);     
-      })
-      .catch(next);
+router.delete('/remove/:id', async(req, res, next) => {
+    const id = req.params.id;
+    const result = await PostModel.delPostById(id);
+    res.json(responseData);
   });
-
-
 
 module.exports = router;

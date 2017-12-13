@@ -104,23 +104,19 @@ router.get('/', function(req, res, next) {
 });
 
 // GET /user/:name 获取用户信息
-router.get('/:name', function(req, res, next) {
-    let name = req.params.name;
-    UserModel.getUserByName(name).then((result)=>{
-        delete result.password;
-        responseData.data=result;
-        res.json(responseData);           
-    }).catch(next);
+router.get('/:name', async(req, res, next) => {
+    const name = req.params.name;
+    const result = await UserModel.getUserByName(name);
+    delete result.password;
+    responseData.data=result;
+    res.json(responseData);
 });
 
 // DELETE /user/remove/:id 删除用户
-router.delete('/remove/:id', function(req, res, next) {
-    var id = req.params.id;
-    UserModel.delUserById(id)
-      .then(function () {
-        res.json(responseData);     
-      })
-      .catch(next);
+router.delete('/remove/:id', async(req, res, next) => {
+    const id = req.params.id;
+    const result = await UserModel.delUserById(id);
+    res.json(responseData);
   });
 
 module.exports = router;

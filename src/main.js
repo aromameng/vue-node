@@ -13,7 +13,7 @@ import store from './vuex'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false; // 设置为 false 以阻止 vue 在启动时生成生产提示
 
 Vue.use(Toast);
 Vue.use(VueQuillEditor)
