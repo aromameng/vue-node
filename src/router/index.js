@@ -3,19 +3,19 @@ import Router from 'vue-router'
 
 import HelloWorld from '@/components/HelloWorld'
 import home from 'views/home'
-import bookList from 'views/bookList'
-import bookDetail from 'views/bookDetail'
+import bookList from 'views/book-list'
+import bookDetail from 'views/book-detail'
 import login from 'views/login'
 import register from 'views/register'
 import test from 'views/test'
 import notFound from 'views/404'
-import userCenter from 'views/userCenter'
+import userCenter from 'views/user-center'
 
 // 后台
-import addBook from 'views/admin/addBook'
+import addBook from 'views/admin/add-book'
 import admin from 'views/admin/index'
-import adminBook from 'views/admin/bookList'
-import adminUser from 'views/admin/userList'
+import adminBook from 'views/admin/book-list'
+import adminUser from 'views/admin/user-list'
 Vue.use(Router)
 
 export default new Router({

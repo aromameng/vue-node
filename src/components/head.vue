@@ -63,6 +63,7 @@ export default {
             width: 1000px;
             margin: 0 auto;
             vertical-align: middle;
+            text-align: left;
         }
         .user-info{
             float: right;

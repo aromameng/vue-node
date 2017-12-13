@@ -8,6 +8,9 @@
       <p class="time">出版日期：{{bookInfo.publish | dateFormat}}</p>
       <p>内容简介：</p>
       <div class="content" v-html="bookInfo.content"></div>
+      <div class="book-pv">
+        
+      </div>
       <p class="s-title">评论：</p>
       <ul class="comment-list">
         <li v-for="(item,index) in commentList" :key="index">
