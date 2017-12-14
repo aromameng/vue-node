@@ -7,7 +7,6 @@ import bookList from 'views/book-list'
 import bookDetail from 'views/book-detail'
 import login from 'views/login'
 import register from 'views/register'
-import test from 'views/test'
 import notFound from 'views/404'
 import userCenter from 'views/user-center'
 
@@ -68,11 +67,6 @@ export default new Router({
       meta:{
         title:'个人主页'
       }
-    },
-    {
-      path: '/test',
-      name: 'test',
-      component: test
     },
     {
       path: '/admin/addBook',
