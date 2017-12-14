@@ -30,7 +30,7 @@ export default {
     ...mapGetters(['isLogin','userInfo'])
   },
   created(){
-
+    if(!this.userInfo) return this.$router.push({name:'login'})
   },
   mounted(){
     

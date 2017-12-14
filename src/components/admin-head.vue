@@ -3,14 +3,14 @@
       <div class="head-inner">
           <router-link to="/"><img src="../assets/img/pic.jpg" class="logo" /></router-link>
           <ul class="menu">
-              <li v-if="userInfo.isAdmin" :class="{'active':curMenu('addBook','adminBook')}">
+              <li v-if="userInfo && userInfo.isAdmin" :class="{'active':curMenu('addBook','adminBook')}">
                   <a class="menu-item" href="javascript:;">图书管理</a>
                   <div class="box">
                       <router-link :class="{'active':curMenu('adminNews')}" to="/admin/book" class="link">图书列表</router-link>
                       <router-link :class="{'active':curMenu('addNews')}" to="/admin/addBook" class="link">添加图书</router-link>
                   </div>                
               </li>
-              <li v-if="userInfo.isAdmin" >
+              <li v-if="userInfo && userInfo.isAdmin" >
                   <router-link :class="{'active':curMenu('adminUser')}" to="/admin/user" class="link menu-item">用户列表</router-link>
               </li>
           </ul>

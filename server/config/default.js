@@ -6,8 +6,8 @@ mongodb: mongodb 的地址，evue 为 db 名
 module.exports = {
     port: 3000,
     session: {
-        secret: 'myblog',
-        key: 'myblog',
+        secret: 'evue',
+        key: 'evue',
         maxAge: 2592000000
     },
     mongodb: 'mongodb://localhost:27017/evue'

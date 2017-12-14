@@ -2,6 +2,7 @@ var express = require('express');
 var router = express.Router();
 import PostModel from '../../models/posts'
 import {formatDate} from '../../public/js/helper'
+import {checkLogin,checkAdmin} from '../../middlewares/check'
 
 let responseData;
 router.use(function (req, res, next) {
@@ -42,7 +43,7 @@ router.get('/new10', function(req, res, next) {
 });
 
 // POST /book 创建图书
-router.post('/', function(req, res, next) {
+router.post('/', checkAdmin , function(req, res, next) {
     req.body.publish = formatDate(new Date(req.body.publish),'yyyy-MM-dd hh:mm:ss');
     var {author,title,publish,content} = req.body;
     var post = {
@@ -62,7 +63,7 @@ router.post('/', function(req, res, next) {
 });
 
 /* POST /book/:id 修改图书 */
-router.post('/:id', function(req, res, next) {
+router.post('/:id', checkAdmin , function(req, res, next) {
     var id=req.params.id;
     req.body.publish = formatDate(new Date(req.body.publish),'yyyy-MM-dd hh:mm:ss');
     var {author,title,publish,content} = req.body;
@@ -87,7 +88,7 @@ router.get('/:id', async(req, res, next) => {
 });
 
 // DELETE /book/remove/:postId 删除一篇文章
-router.delete('/remove/:id', async(req, res, next) => {
+router.delete('/remove/:id', checkAdmin , async(req, res, next) => {
     const id = req.params.id;
     const result = await PostModel.delPostById(id);
     res.json(responseData);

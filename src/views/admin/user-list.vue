@@ -1,7 +1,7 @@
 <template>
   <div class="news-view">
     <admin-head></admin-head>
-    <div class="cp-scroll-content" v-if="userInfo.isAdmin">
+    <div class="cp-scroll-content" v-if="userInfo && userInfo.isAdmin">
       <h4 class="c-title">用户列表</h4>
       <ul class="user-list">
         <li class="list-head">
@@ -29,7 +29,7 @@
         @on-ok="sureDel">
         <p>确定要删除吗?</p>
     </Modal>
-    <div class="cp-no-authority" v-if="!userInfo.isAdmin">
+    <div class="cp-no-authority" v-if="!(userInfo && userInfo.isAdmin)">
         <span>你无权限访问该页面</span>
     </div>
   </div>
@@ -56,7 +56,7 @@ export default {
       ...mapGetters(['userInfo'])
   },
   created(){
-    
+    if(!this.userInfo) return this.$router.push({name:'login'})
   },
   mounted(){
     this.getList();

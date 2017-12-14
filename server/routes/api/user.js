@@ -4,6 +4,8 @@ import UserModel from '../../models/user'
 import { userInfo } from 'os';
 var sha1 = require('sha1');
 
+import {checkLogin,checkAdmin} from '../../middlewares/check'
+
 var formidable = require('formidable'),
     http = require('http'),
     fs = require('fs'),
@@ -87,7 +89,7 @@ router.post('/uploadimg', function(req, res, next) {
 });
 
 // GET 获取用户列表
-router.get('/', function(req, res, next) {
+router.get('/', checkAdmin , function(req, res, next) {
     let page= Number(req.query.page),
         rows =Number(req.query.rows);
     UserModel.getUserList(page,rows).then((result)=>{
@@ -104,7 +106,7 @@ router.get('/', function(req, res, next) {
 });
 
 // GET /user/:name 获取用户信息
-router.get('/:name', async(req, res, next) => {
+router.get('/:name',async(req, res, next) => {
     const name = req.params.name;
     const result = await UserModel.getUserByName(name);
     if(result) delete result.password;
@@ -113,7 +115,7 @@ router.get('/:name', async(req, res, next) => {
 });
 
 // DELETE /user/remove/:id 删除用户
-router.delete('/remove/:id', async(req, res, next) => {
+router.delete('/remove/:id', checkAdmin, async(req, res, next) => {
     const id = req.params.id;
     const result = await UserModel.delUserById(id);
     res.json(responseData);
