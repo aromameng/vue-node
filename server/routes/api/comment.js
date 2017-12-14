@@ -3,7 +3,7 @@ var router = express.Router();
 import CommentModel from '../../models/comment'
 
 var moment = require('moment');
-var objectIdToTimestamp = require('objectid-to-timestamp');
+var objectIdToTimestamp = require('../../public/js/helper').objectIdToTimestamp;
 
 let responseData;
 router.use(function (req, res, next) {
@@ -52,6 +52,5 @@ router.post('/add/:bookId/:authorId', function(req, res, next) {
         })
         .catch(next);
 });
-
 
 module.exports = router;

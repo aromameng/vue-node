@@ -4,7 +4,6 @@ import router from './router'
 import FastClick from 'fastclick'
 import filters from './filters';
 import components from './components';
-import mock from './mock';
 import Toast from './assets/js/toast';
 
 import VueQuillEditor from 'vue-quill-editor';

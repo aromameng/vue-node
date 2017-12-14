@@ -27,3 +27,13 @@ export const formatDate=function(date,fmt){
     return fmt;
 }
 
+/*
+* 将mongodb的_id 转换成时间格式
+* sage:
+* 5a322ebdf6a74d32d0fa0081 => 2017-12-14T07:56:45.000Z
+*/
+export const objectIdToTimestamp = (_id) => {
+    var timestamp = _id.toString().substring( 0, 8 );
+    return new Date( parseInt( timestamp, 16 ) * 1000 );
+}
+

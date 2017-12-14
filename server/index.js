@@ -6,7 +6,6 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var bodyParser = require('body-parser');
-// import query from './config/mysql/db';  //数据库连接句柄cls
 var config = require('./config/default');
 var http = require('http');
 
@@ -57,8 +56,5 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-
-// 设置为全局数据库连接句柄
-// global.query = query;
 
 module.exports = app;
