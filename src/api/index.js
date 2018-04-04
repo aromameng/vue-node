@@ -18,6 +18,12 @@ export const user_reg = (data) =>{
   return request_post(url,data)
 }
 
+// 注册2
+export const user_reg2 = (data,file) =>{
+  const url = parse(`${API_USER}/regg`,data)
+  return request_upload(url,file)
+}
+
 // 登录
 export const user_login = (data) =>{
   const url = `${API_USER}/login`

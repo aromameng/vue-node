@@ -6,7 +6,7 @@ var book =require('./book'),
     comment = require('./comment');
 
 apiRouter.get('*',function(req, res, next) {
-    var allowOrigin=["http://localhost:8080/","http://127.0.0.1:8080/"];
+    var allowOrigin=["http://localhost:8080/","http://127.0.0.1:8080/","http://172.18.84.28:8017"];
     var reqOrigin ='http://' + req.header("referer");
     var isAllow=false;
   
@@ -35,7 +35,7 @@ apiRouter
 
 //错误处理
 apiRouter.use(function(err, req, res, next) {
-    console.error(11111111111);
+    // console.error(11111111111);
     console.log('err',err)
     res.status(500).send(err);
 });

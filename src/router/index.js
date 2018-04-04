@@ -9,6 +9,9 @@ import login from 'views/login'
 import register from 'views/register'
 import notFound from 'views/404'
 import userCenter from 'views/user-center'
+import chat from 'views/chat'
+// import other from 'views/other'
+const other = r => require.ensure([], () => r(require('views/other')), 'other')
 
 // 后台
 import addBook from 'views/admin/add-book'
@@ -37,8 +40,13 @@ export default new Router({
     {
       path: '/book',
       name: 'bookList',
-      component: bookList
-    },
+      component: bookList,
+      children:[{
+          path:'other',
+          name:'other',
+          component:other
+        }]
+      },
     {
       path: '/book/:id',
       name: 'bookDetail',
@@ -69,6 +77,14 @@ export default new Router({
       }
     },
     {
+      path: '/chat',
+      name: 'chat',
+      component: chat,
+      meta:{
+        title:'聊天'
+      }
+    },
+    {
       path: '/admin/addBook',
       name: 'addBook',
       component: addBook
@@ -87,6 +103,6 @@ export default new Router({
        path: '/admin/user',
        name: 'adminUser',
        component: adminUser
-      },
+      }
   ]
 })

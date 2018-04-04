@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import {mapGetters} from 'vuex'
+import {mapGetters,mapActions} from 'vuex'
 
 export default {
   data(){
@@ -27,15 +27,32 @@ export default {
       }
   },
   computed: {
-    ...mapGetters(['isLogin','userInfo'])
+    ...mapGetters(['isLogin','userInfo']),
+    ...mapGetters('book',{
+      count:'count'
+    }),
+    ...mapGetters('test',{
+      count2:'count'
+    })
   },
   created(){
+    console.log('book',this.count)
+    console.log('test',this.count2)
     if(!this.userInfo) return this.$router.push({name:'login'})
+    // 调用book模块的getCount方法
+    this.getCount();
+    console.log('book',this.count)
+    // 调用test模块的getCount方法
+    this.$store.dispatch('test/getCount');
+    console.log('test',this.count2)
   },
   mounted(){
     
   },
   methods:{
+    ...mapActions('book', [
+      'getCount'
+    ])
   }
 }
 </script>

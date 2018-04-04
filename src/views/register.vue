@@ -28,7 +28,7 @@
 
 <script>
 
-import {user_reg,uploadimg} from 'api/index'
+import {user_reg,uploadimg, user_reg2} from 'api/index'
 
 export default {
   data(){
@@ -60,10 +60,12 @@ export default {
           }
           const user={
               name:this.user,
-              password:this.password,
-              avatar:this.pic
+              password:this.password
           }
-          user_reg(user).then((res)=>{
+          var fData = new FormData();
+          fData.append('file', this.file);
+          console.log(this.file)
+          user_reg2(user,fData).then((res)=>{
             //   console.log(res)
               this.$toast('注册成功！');
               var data={
@@ -88,12 +90,12 @@ export default {
       },
       upload(event){
           this.file = event.target.files[0];
-        //   this.pic = this.getFullPath(this.file);
-          var fData = new FormData();
-          fData.append('file', this.file);
-          uploadimg(fData).then((res)=>{
-              this.pic=res.data;
-          })
+          this.pic = this.getFullPath(this.file);
+          // var fData = new FormData();
+          // fData.append('file', this.file);
+          // uploadimg(fData).then((res)=>{
+          //     this.pic=res.data;
+          // })
       }
   }
 }

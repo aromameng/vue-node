@@ -88,6 +88,43 @@ router.post('/uploadimg', function(req, res, next) {
     });
 });
 
+// POST 统一提交注册信息，将图片和姓名密码统一提交
+router.post('/reg',function(req,res,next){
+    // 这里是有req.body.name 无效
+    var user={
+        name:req.query.name,
+        password: sha1(req.query.password),
+        isAdmin:false
+    }
+    var form = new formidable.IncomingForm();
+    form.encoding = 'utf-8';
+    form.uploadDir = "./server/public/images";
+    form.maxFieldsSize = 2 * 1024 * 1024;
+    form.parse(req, function(err,fields,files){
+        let file = files.file;
+        fs.rename(file.path , form.uploadDir + '/' + file.name);
+        user.avatar = 'http://localhost:8080/images/' + file.name;
+        UserModel.getUserByName(user.name).then((userInfo)=>{
+            if(userInfo){
+                responseData.code=1;
+                responseData.msg="用户名重复，请重新注册";
+                res.json(responseData);
+                return;
+            }
+            UserModel.create(user).then((result)=>{
+                var user = result.ops[0];
+                // 将用户信息存入 session
+                delete user.password;
+                req.session.user = user;
+                responseData.data=user;
+                res.json(responseData);
+            }).catch(next);
+        })
+        
+    });
+
+})
+
 // GET 获取用户列表
 router.get('/', checkAdmin , function(req, res, next) {
     let page= Number(req.query.page),

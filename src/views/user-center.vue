@@ -4,6 +4,7 @@
     <div class="cp-scroll-content">      
       <img class="pic" :src="user.avatar || defaultImg" />   
       <p class="name">{{user.name}}</p>
+      <!-- <Button type="primary" @click="$router.push({name:'chat',query:{id:user._id}})">聊天</Button> -->
     </div>
   </div>
 </template>
@@ -11,6 +12,7 @@
 <script>
 import {mapGetters} from 'vuex'
 import {get_user_info} from 'api/index'
+import {Button} from 'iview'
 
 export default {
   data(){
@@ -40,6 +42,7 @@ export default {
     getUserInfo(){
         get_user_info(this.userName).then((res)=>{
             this.user = res.data;
+            this.$store.commit('SET_CHAT_USER',this.user);
         }).catch((err)=>{
           console.log(err)
         })

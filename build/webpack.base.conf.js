@@ -31,6 +31,12 @@ module.exports = {
       'js': resolve('src/assets/js')
     }
   },
+  externals:{
+    'vue': 'Vue',
+    'vue-router': 'VueRouter',
+    'vuex': 'Vuex',
+    'axios': 'axios'
+  },
   module: {
     rules: [
       {

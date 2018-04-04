@@ -11,6 +11,9 @@ import VeeValidate from 'vee-validate';
 import store from './vuex'
 import iView from 'iview';
 import 'iview/dist/styles/iview.css';
+import './assets/css/normalize.scss';
+import './assets/css/common.scss';
+import './assets/css/component.scss';
 
 Vue.config.productionTip = false; // 设置为 false 以阻止 vue 在启动时生成生产提示
 

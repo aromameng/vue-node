@@ -2,7 +2,8 @@ import * as types from './mutation-types'
 
 export const state = {
 	'loginStatus': JSON.parse(sessionStorage.getItem("loginStatus")) || false, //用户登录状态
-	'userInfo': JSON.parse(sessionStorage.getItem("userInfo")) || null //用户登录信息
+    'userInfo': JSON.parse(sessionStorage.getItem("userInfo")) || null, //用户登录信息
+    'chatUser':{}
 }
 
 export const mutations ={
@@ -13,6 +14,9 @@ export const mutations ={
         state.userInfo = userInfo;
         sessionStorage.setItem("loginStatus", JSON.stringify(state.loginStatus))
 		sessionStorage.setItem("userInfo", JSON.stringify(state.userInfo))
+    },
+    [types.SET_CHAT_USER](state,userInfo){
+        state.chatUser = userInfo;
     }
 }
 

@@ -121,7 +121,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .news-detail-view{
     .cp-scroll-content{
       line-height: 25px;

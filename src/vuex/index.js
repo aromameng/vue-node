@@ -6,9 +6,18 @@ import * as actions from './actions'
 import * as getters from './getters'
 import {mutations,state} from './mutations'
 
+import test from './modules/test';
+import book from './modules/book';
+
 export default new Vuex.Store({
-    state,
-    getters,
-    mutations,
-    actions
+    modules: {
+        book:{...book,namespaced: true},
+        test:{...test,namespaced: true},
+        index:{
+            state,
+            getters,
+            mutations,
+            actions
+        }
+    }
 })

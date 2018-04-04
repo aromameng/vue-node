@@ -6,8 +6,9 @@ var cookieParser = require('cookie-parser');
 var session = require('express-session');
 var MongoStore = require('connect-mongo')(session);
 var bodyParser = require('body-parser');
-var config = require('./config/default');
-var http = require('http');
+var config = require('./config/default'),
+    cors = require('cors'),
+    http = require('http');
 
 var apiRouter = require('./routes/api/index');
 
@@ -16,6 +17,9 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
+
+// 跨域
+app.use(cors());
 
 // session 中间件
 app.use(session({
