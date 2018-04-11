@@ -1,9 +1,12 @@
 <template>
-  <div>
-    <transition name="router-fade" mode="out-in">
-      <router-view class="view" />
+    <transition name="router-fade" mode="out-in">     
+      <div>
+        <keep-alive>
+            <router-view v-if="$route.meta.keepAlive" class="view"></router-view>
+        </keep-alive> 
+        <router-view class="view" v-if="!$route.meta.keepAlive"></router-view>
+      </div>     
     </transition>
-  </div>
 </template>
 
 <script>

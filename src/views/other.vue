@@ -30,7 +30,8 @@ export default {
     next()
   },
   created(){
-    console.log('created')
+    console.log('created=====',this.title)
+    this.title='其他222'
   },
   mounted(){
     console.log('mounted')    

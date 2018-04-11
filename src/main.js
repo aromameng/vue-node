@@ -29,6 +29,12 @@ if ('addEventListener' in document) {
   }, false)
 }
 
+router.beforeEach((to, from, next) => {
+  // 默认keepAlive为false
+  if(!to.meta.keepAlive) to.meta.keepAlive = false;
+  next()
+})
+
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

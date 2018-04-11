@@ -14,6 +14,7 @@
           </li>
         </ul>
         <router-link to="/book">查看更多>></router-link>
+        <router-link to="/test">测试>></router-link>
       </section>    
     </div>
   </div>

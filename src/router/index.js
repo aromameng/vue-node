@@ -12,12 +12,11 @@ import userCenter from 'views/user-center'
 import chat from 'views/chat'
 // import other from 'views/other'
 const other = r => require.ensure([], () => r(require('views/other')), 'other')
+const test = r => require.ensure([], () => r(require('views/test')), 'test')
 
-// 后台
-import addBook from 'views/admin/add-book'
-import admin from 'views/admin/index'
-import adminBook from 'views/admin/book-list'
-import adminUser from 'views/admin/user-list'
+
+import adminRoute from './admin'
+
 Vue.use(Router)
 
 export default new Router({
@@ -25,32 +24,39 @@ export default new Router({
     {
       path: '*', 
       redirect: '/404',
-      
+      meta:{}
     },
     {
       path: '/404',
       name:'notFound',
-      component:notFound
+      component:notFound,
+      meta:{}
     },
     {
       path: '/',
       name: 'home',
-      component: home
+      component: home,
+      meta:{
+        keepAlive: false
+      }
     },
     {
       path: '/book',
       name: 'bookList',
       component: bookList,
+      meta:{},
       children:[{
           path:'other',
           name:'other',
-          component:other
+          component:other,
+          meta:{}
         }]
       },
     {
       path: '/book/:id',
       name: 'bookDetail',
-      component: bookDetail
+      component: bookDetail,
+      meta:{}
     },
     {
       path: '/login',
@@ -85,24 +91,14 @@ export default new Router({
       }
     },
     {
-      path: '/admin/addBook',
-      name: 'addBook',
-      component: addBook
-    },
-    {
-      path: '/admin',
-      name: 'admin',
-      component: admin
-    },
-    {
-      path: '/admin/book',
-      name: 'adminBook',
-      component: adminBook
-     },
-     {
-       path: '/admin/user',
-       name: 'adminUser',
-       component: adminUser
+      path: '/test',
+      name: 'test',
+      component: test,
+      meta:{
+        title:'测试'
       }
+    },
+    // 后台页面路由
+    ...adminRoute
   ]
 })
