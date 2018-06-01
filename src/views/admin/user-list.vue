@@ -1,7 +1,6 @@
 <template>
   <div class="news-view">
-    <admin-head></admin-head>
-    <div class="cp-scroll-content" v-if="userInfo && userInfo.isAdmin">
+    <template  v-if="userInfo && userInfo.isAdmin">
       <h4 class="c-title">用户列表</h4>
       <ul class="user-list">
         <li class="list-head">
@@ -22,7 +21,7 @@
         </li>
       </ul>
       <Page :total="totalNum" @on-change="changePage"></Page>
-    </div>
+    </template>
     <Modal
         v-model="modal1"
         title="提示"

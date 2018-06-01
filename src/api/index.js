@@ -20,7 +20,7 @@ export const user_reg = (data) =>{
 
 // 注册2
 export const user_reg2 = (data,file) =>{
-  const url = parse(`${API_USER}/regg`,data)
+  const url = parse(`${API_USER}/reg`,data)
   return request_upload(url,file)
 }
 

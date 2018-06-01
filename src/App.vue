@@ -1,6 +1,6 @@
 <template>
     <transition name="router-fade" mode="out-in">     
-      <div>
+      <div class="container">
         <keep-alive>
             <router-view v-if="$route.meta.keepAlive" class="view"></router-view>
         </keep-alive> 
@@ -26,6 +26,9 @@ export default {
 </script>
 
 <style lang="scss">
+.container{
+  height: 100%;
+}
 // @import './assets/css/normalize.scss';
 // @import './assets/css/common.scss';
 // @import './assets/css/component.scss';

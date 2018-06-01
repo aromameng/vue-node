@@ -1,7 +1,6 @@
 <template>
   <div class="addnews-view">
-    <admin-head></admin-head>
-    <div class="cp-scroll-content" v-if="userInfo && userInfo.isAdmin">
+    <template v-if="userInfo && userInfo.isAdmin">
         <h4 class="c-title">{{title}}</h4>
         <div class="form">
             <div class="label">
@@ -27,7 +26,7 @@
 
             <div class="label"><button class="submit" @click="submit()">提交</button></div>
         </div>       
-    </div>
+    </template>
     <div class="cp-no-authority" v-if="!(userInfo && userInfo.isAdmin)">
         <span>你无权限访问该页面</span>
     </div>
@@ -81,7 +80,7 @@ export default {
       },
       ...mapGetters(['userInfo'])
   },
-  created(){
+  activated(){
     if(!this.userInfo) return this.$router.push({name:'login'})
     this.newsId=this.$route.query.id;
     if(this.newsId){

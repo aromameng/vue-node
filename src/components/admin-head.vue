@@ -2,7 +2,7 @@
   <div class="cp-head">
       <div class="head-inner">
           <router-link to="/"><img src="../assets/img/pic.jpg" class="logo" /></router-link>
-          <ul class="menu">
+          <!-- <ul class="menu">
               <li v-if="userInfo && userInfo.isAdmin" :class="{'active':curMenu('addBook','adminBook')}">
                   <a class="menu-item" href="javascript:;">图书管理</a>
                   <div class="box">
@@ -10,17 +10,20 @@
                       <router-link :class="{'active':curMenu('addNews')}" to="/admin/addBook" class="link">添加图书</router-link>
                   </div>                
               </li>
-              <li v-if="userInfo && userInfo.isAdmin" >
+              <li v-if="userInfo && userInfo.isAdmin" :class="{'active':curMenu('adminUser')}">
                   <router-link :class="{'active':curMenu('adminUser')}" to="/admin/user" class="link menu-item">用户列表</router-link>
               </li>
-          </ul>
+          </ul> -->
+          <div class="breadcrumb">
+            
+          </div>
           <div class="user-info"  v-if="!isLogin">
               <router-link to="/register" class="link">注册</router-link>
               <router-link to="/login" class="link">登录</router-link>
           </div>
           <div class="user-info" v-if="isLogin">
               <span>{{userInfo && userInfo.name}}</span>
-              <router-link to="/admin" class="person">个人中心</router-link>
+              <router-link to="/admin/home" class="person">个人中心</router-link>
               <span class="btn" @click="loginout">退出登录</span>
           </div>
       </div>    
@@ -72,10 +75,16 @@ export default {
         width: 100%;
         z-index: 2;
         .head-inner{
-            width: 1000px;
+            // width: 1000px;
             margin: 0 auto;
             vertical-align: middle;
             text-align: left;
+            padding-left: 200px;
+            padding-right: 15px;
+        }
+        .breadcrumb{
+            display: inline-block;
+            padding-left: 15px;
         }
         .user-info{
             float: right;
@@ -107,8 +116,11 @@ export default {
             text-align: left;
             &>li{
                 display:inline-block;
-                padding-right:20px;
+                padding:0 20px;
                 position: relative;
+                &>.menu-item{
+                    text-align: center;
+                }              
                 .menu-item{
                     width: 100%;
                     display: inline-block;
@@ -120,6 +132,7 @@ export default {
                     }
                 }
                 &.active{
+                    background: #eee;
                     .menu-item{
                         color: #175199;
                     }
@@ -154,4 +167,12 @@ export default {
             }
         }
     }
+.user-view{
+    .cp-head{
+        .head-inner{
+            width: 1000px;
+            margin: 0 auto;
+        }      
+    }
+}
 </style>

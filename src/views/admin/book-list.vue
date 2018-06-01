@@ -1,7 +1,6 @@
 <template>
   <div class="news-view">
-    <admin-head></admin-head>
-    <div class="cp-scroll-content" v-if="userInfo && userInfo.isAdmin">
+    <template v-if="userInfo && userInfo.isAdmin"> 
       <h4 class="c-title">图书列表</h4>
       <ul class="news-list">
         <li class="list-head">
@@ -20,7 +19,7 @@
         </li>
       </ul>
       <Page :total="totalNum" @on-change="changePage"></Page>
-    </div>
+    </template>
     <Modal
         v-model="modal1"
         title="提示"
@@ -55,7 +54,7 @@ export default {
   created(){
     if(!this.userInfo) return this.$router.push({name:'login'})
   },
-  mounted(){
+  activated(){
     this.getList();
   },
   filters:{
