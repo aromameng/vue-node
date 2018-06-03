@@ -1,7 +1,7 @@
 <template>
-  <div class="admin-view" :class="{'user-view': !userInfo.isAdmin}">
+  <div class="admin-view" :class="{'user-view': userInfo && !userInfo.isAdmin}">
     <admin-head></admin-head>
-    <Menu ref="menu" v-if="userInfo.isAdmin"></Menu>
+    <Menu ref="menu" v-if="userInfo && userInfo.isAdmin"></Menu>
     <div class="cp-scroll-content">
       <transition>
            <keep-alive>
@@ -29,7 +29,7 @@ export default {
     Menu
   },
   activated(){
-    if(this.$route.name == 'admin' && this.userInfo.isAdmin ){
+    if(this.$route.name == 'admin' && this.userInfo && this.userInfo.isAdmin ){
       // console.log(this.userInfo)
       this.$nextTick(()=>{
         this.$router.push({name:'adminBook'})

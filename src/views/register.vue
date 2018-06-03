@@ -64,7 +64,7 @@ export default {
           }
           var fData = new FormData();
           fData.append('file', this.file);
-          console.log(this.file)
+        //   console.log(this.file)
           user_reg2(user,fData).then((res)=>{
             //   console.log(res)
               this.$toast('注册成功！');

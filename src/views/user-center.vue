@@ -4,7 +4,6 @@
     <div class="cp-scroll-content">      
       <img class="pic" :src="user.avatar || defaultImg" />   
       <p class="name">{{user.name}}</p>
-      <!-- <Button type="primary" @click="$router.push({name:'chat',query:{id:user._id}})">聊天</Button> -->
     </div>
   </div>
 </template>

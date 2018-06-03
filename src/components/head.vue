@@ -40,6 +40,7 @@ export default {
               userInfo:res.data
           }
          this.$store.commit('SET_LOGIN',data);
+         this.$toast('退出登录成功！');
       })
     },
     curMenu(name){

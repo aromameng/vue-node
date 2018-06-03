@@ -8,8 +8,6 @@ export const state = {
 
 export const mutations ={
     [types.SET_LOGIN](state,{status,userInfo}){
-        // console.log('status',status)
-        // console.log('userInfo',userInfo)
         state.loginStatus=status;
         state.userInfo = userInfo;
         sessionStorage.setItem("loginStatus", JSON.stringify(state.loginStatus))
