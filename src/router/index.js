@@ -13,6 +13,7 @@ import chat from 'views/chat'
 // import other from 'views/other'
 const other = r => require.ensure([], () => r(require('views/other')), 'other')
 const test = r => require.ensure([], () => r(require('views/test')), 'test')
+const io = r => require.ensure([], () => r(require('views/io')), 'io')
 
 
 import adminRoute from './admin'
@@ -96,6 +97,14 @@ export default new Router({
       component: test,
       meta:{
         title:'测试'
+      }
+    },
+    {
+      path: '/io',
+      name: 'io',
+      component: io,
+      meta:{
+        title:'io'
       }
     },
     // 后台页面路由

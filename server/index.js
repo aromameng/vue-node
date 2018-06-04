@@ -14,6 +14,18 @@ var apiRouter = require('./routes/api/index');
 
 var app = express();
 
+var server = require('http').createServer(app);
+var io = require('socket.io')(server);
+io.on('connection', function(socket){ 
+  /* … */ 
+  console.log('io')
+  socket.emit('news', { hello: 'world' });
+  socket.on('my other event', function (data) {
+    console.log('my other event',data);
+  });
+});
+server.listen(3000);
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
