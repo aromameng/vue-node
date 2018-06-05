@@ -6,7 +6,7 @@ var book =require('./book'),
     comment = require('./comment');
 
 apiRouter.get('*',function(req, res, next) {
-    var allowOrigin=["http://localhost:8080/","http://127.0.0.1:8080/","http://172.18.84.28:8017"];
+    var allowOrigin=["http://localhost:8090/","http://127.0.0.1:8090/","http://172.18.84.28:8017"];
     var reqOrigin ='http://' + req.header("referer");
     var isAllow=false;
   

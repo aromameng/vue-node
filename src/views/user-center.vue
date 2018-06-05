@@ -4,6 +4,22 @@
     <div class="cp-scroll-content">      
       <img class="pic" :src="user.avatar || defaultImg" />   
       <p class="name">{{user.name}}</p>
+      <Button @click="chat()">聊天</Button>   
+    </div>
+    <div class="chat-dialog" v-show="chatShow">
+      <div class="chat-head">{{userInfo.name}}</div>
+      <div class="chat-inner">
+        <ul class="chat-list">
+          <li v-for="(item,index) in chatList" :key="index" class="message-list">
+            <img class="pic" :src="defaultImg" />
+            <span class="msg">{{item.content}}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="chat-input">
+        <textarea v-model="chatText"></textarea>
+        <Button @click="send()">发送</Button>
+      </div>
     </div>
   </div>
 </template>
@@ -19,7 +35,12 @@ export default {
           user:'',
           userName:'',
           defaultImg: require("../assets/img/default.jpg"),
-          lists:[]
+          lists:[],
+          chatShow: false,
+          chatText: '',
+          chatList:[{
+
+          }]
       }
   },
   computed: {
@@ -45,6 +66,13 @@ export default {
         }).catch((err)=>{
           console.log(err)
         })
+    },
+    chat() {
+      console.log(this.user)
+      this.chatShow = true
+    },
+    send(){
+
     }
   }
 }
@@ -52,6 +80,8 @@ export default {
 
 <style lang="scss" scoped>
   .user-center-view{
+      position: relative;
+      height: 100%;
       text-align: center;
       .c-title{
           text-align: center;
@@ -65,6 +95,43 @@ export default {
     }
     .name{
         font-size: 20px;
+    }
+    .chat-dialog{
+      position: absolute;
+      width: 300px;
+      height: 400px;
+      background: #fff;
+      bottom: 0;
+      right: 0;
+      display: flex;
+      flex-direction: column;
+    }
+    .chat-head{
+      width: 100%;
+      line-height: 40px;
+      height: 40px;
+      border-bottom: 1px solid #ccc;
+    }
+    .chat-inner{
+      flex:1;
+      overflow-y: atuo;
+      .message-list{
+        display: flex;
+        .pic{
+          display: inline-block;
+          width: 50px;
+          height: 50px;
+          border-radius: 50%;
+        }
+        .msg{
+          display: inline-block;
+          background: #ccc;
+        }
+      }
+    }
+    .chat-input{
+      border-top: 1px solid #ccc;
+      height: 100px;
     }
   }
 </style>

@@ -50,3 +50,11 @@ exports.Comment = mongolass.model('Comment', {
 });
 exports.Comment.index({ postId: 1, _id: 1 }).exec();// 通过文章 id 获取该文章下所有留言，按留言创建时间升序
 exports.Comment.index({ author: 1, _id: 1 }).exec();// 通过用户 id 和留言 id 删除一个留言
+
+exports.Chat = mongolass.model('chat', {
+    // conversationId: {type: Mongolass.Types.ObjectId },
+    content: { type: 'string' },
+    relation: { type: 'string' }
+})
+exports.Chat.index({ conversationId: 1, _id: 1 }).exec();
+
