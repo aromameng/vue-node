@@ -2,6 +2,8 @@
 
 使用express+mongodb搭建后台，vue2全家桶搭建前端
 
+使用iview统一前后台UI
+
 此项目主要是为了加深对node和后端的了解
 
 目前实现的功能模块
@@ -12,7 +14,6 @@
 - [x] 图书管理
 - [x] 评论管理
 
-参考项目：<https://github.com/nswbmw/N-blog>
 
 待完善中...
 
@@ -28,4 +29,9 @@
 
 `npm run dev`
 
+## 参考和网站链接
+
+- 主要参考项目 <https://github.com/nswbmw/N-blog>
+- iview官方网站 <https://www.iviewui.com/>
+- Mongolass <https://www.npmjs.com/package/mongolass>
 
