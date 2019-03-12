@@ -21,6 +21,10 @@
 
 运行前记得要安装 Mongodb
 
+windows 平台下载地址 https://www.mongodb.com/download-center/community
+
+安装步骤可以参考文章 https://aromameng.github.io/2017/03/12/2017-03-12-mongoDB_install/
+
 - 安装
 
 `npm install` 
