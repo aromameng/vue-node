@@ -9,7 +9,8 @@ apiRouter.get('*',function(req, res, next) {
     var allowOrigin=["http://localhost:8090/","http://127.0.0.1:8090/","http://172.18.84.28:8017"];
     var reqOrigin ='http://' + req.header("referer");
     var isAllow=false;
-  
+
+    
     for(var i=0,len=allowOrigin.length;i<len;i++){
       if(reqOrigin !=undefined && reqOrigin.indexOf(allowOrigin[i])>-1){
         isAllow=true;
@@ -17,10 +18,18 @@ apiRouter.get('*',function(req, res, next) {
       }
     }
     if(reqOrigin !=undefined && isAllow){
-        // 允许所有域的请求 
-        res.header("Access-Control-Allow-Origin", "*"); 
-        res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS"); 
-        next();
+      // 允许所有域的请求 
+      res.header("Access-Control-Allow-Credentials", "true");
+      res.header("Access-Control-Allow-Origin", "http://localhost:8090"); 
+      res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS"); 
+      res.header('Access-Control-Allow-Headers', 'X-Requested-With,content-type');
+      if(req.session.user){
+        console.log('--=====-',req.session)
+      }else{
+        console.log('//////////')
+      }
+
+      next();
     }else{
       res.writeHead(403,{'Content-Type': 'text/plain'});
       res.end();
